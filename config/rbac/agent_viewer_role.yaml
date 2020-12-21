@@ -1,0 +1,20 @@
+# permissions for end users to view agents.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: agent-viewer-role
+rules:
+- apiGroups:
+  - install.openshift.io.install.openshift.io
+  resources:
+  - agents
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - install.openshift.io.install.openshift.io
+  resources:
+  - agents/status
+  verbs:
+  - get

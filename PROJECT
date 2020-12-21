@@ -1,0 +1,13 @@
+domain: install.openshift.io
+layout: go.kubebuilder.io/v3
+projectName: foo
+repo: github.com/mhrivnak/agentinstalloperator
+resources:
+- crdVersion: v1
+  group: install.openshift.io
+  kind: Agent
+  version: v1alpha1
+version: 3-alpha
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
