@@ -20,58 +20,53 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// AgentSpec defines the desired state of Agent
-type AgentSpec struct {
+// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
+// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+
+// ImageSpec defines the desired state of Image
+type ImageSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	Cluster string `json:"role,omitempty"`
 
-	Role string `json:"role,omitempty"`
-
-	// Json formatted string containing the user overrides for the host's pointer ignition
-	IgnitionConfigOverrides string `json:"ignition_config_overrides,omitempty" gorm:"type:text"`
-
-	// Host installation path.
-	InstallationDiskPath string `json:"installation_disk_path,omitempty"`
-
-	// installer args
-	InstallerArgs string `json:"installer_args,omitempty"`
+	SSHPublicKey string `json:"sshPublicKey,omitempty"`
 }
 
-// AgentStatus defines the observed state of Agent
-type AgentStatus struct {
+// ImageStatus defines the observed state of Image
+type ImageStatus struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
-	IsBootstrap bool `json:"isBootstrap"`
+	SizeBytes int    `json:"sizeBytes,omitempty"`
+	URL       string `json:"sizeBytes,omitempty"`
 
-	// Installer version.
-	InstallerVersion string `json:"installer_version,omitempty"`
+	// +kubebuilder:validation:Format=date-time
+	Created metav1.Time `json:"Created,omitempty"`
 
-	// inventory
-	Inventory string `json:"inventory,omitempty" gorm:"type:text"`
+	// +kubebuilder:validation:Format=date-time
+	Expires metav1.Time `json:"Expires,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Agent is the Schema for the agents API
-type Agent struct {
+// Image is the Schema for the images API
+type Image struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   AgentSpec   `json:"spec,omitempty"`
-	Status AgentStatus `json:"status,omitempty"`
+	Spec   ImageSpec   `json:"spec,omitempty"`
+	Status ImageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// AgentList contains a list of Agent
-type AgentList struct {
+// ImageList contains a list of Image
+type ImageList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Agent `json:"items"`
+	Items           []Image `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Agent{}, &AgentList{})
+	SchemeBuilder.Register(&Image{}, &ImageList{})
 }

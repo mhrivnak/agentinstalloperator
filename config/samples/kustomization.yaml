@@ -1,4 +1,5 @@
 ## Append samples you want in your CSV to this file as resources ##
 resources:
 - install.openshift.io_v1alpha1_agent.yaml
+- install.openshift.io_v1alpha1_image.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples

@@ -1,0 +1,7 @@
+apiVersion: install.openshift.io.install.openshift.io/v1alpha1
+kind: Image
+metadata:
+  name: image-sample
+spec:
+  # Add fields here
+  foo: bar
